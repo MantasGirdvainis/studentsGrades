@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -168,10 +169,72 @@ int main() {
                 cout << "Pažymys atnaujintas." << endl;
                 break;
             }
-            case 5:
-            case 6:
-                cout << "Ši funkcija dar neįgyvendinta." << endl;
+            case 5: {
+                if (mokiniuKiekis == 0) {
+                    cout << "Mokinių sąrašas tuščias." << endl;
+                    break;
+                }
+
+                int mokinioNr;
+                cout << "Įveskite mokinio numerį (1-" << mokiniuKiekis << ", 0 - grįžti į meniu): ";
+                cin >> mokinioNr;
+                while (mokinioNr < 0 || mokinioNr > mokiniuKiekis) {
+                    cout << "Neteisingas mokinio numeris. Įveskite skaičių nuo 1 iki " << mokiniuKiekis << " (0 - grįžti į meniu): ";
+                    cin >> mokinioNr;
+                }
+
+                if (mokinioNr == 0) {
+                    break;
+                }
+
+                int indeksas = mokinioNr - 1;
+                if (pazymiuKiekis[indeksas] == 0) {
+                    cout << vardai[indeksas] << " neturi pažymių, vidurkio apskaičiuoti negalima." << endl;
+                    break;
+                }
+
+                int suma = 0;
+                for (int j = 0; j < pazymiuKiekis[indeksas]; j++) {
+                    suma = suma + pazymiai[indeksas][j];
+                }
+
+                double vidurkis = (double) suma / pazymiuKiekis[indeksas];
+                cout << vardai[indeksas] << " vidurkis: " << fixed << setprecision(2) << vidurkis << endl;
                 break;
+            }
+            case 6: {
+                if (mokiniuKiekis == 0) {
+                    cout << "Mokinių sąrašas tuščias." << endl;
+                    break;
+                }
+
+                int mokinioNr;
+                cout << "Įveskite mokinio numerį (1-" << mokiniuKiekis << ", 0 - grįžti į meniu): ";
+                cin >> mokinioNr;
+                while (mokinioNr < 0 || mokinioNr > mokiniuKiekis) {
+                    cout << "Neteisingas mokinio numeris. Įveskite skaičių nuo 1 iki " << mokiniuKiekis << " (0 - grįžti į meniu): ";
+                    cin >> mokinioNr;
+                }
+
+                if (mokinioNr == 0) {
+                    break;
+                }
+
+                int indeksas = mokinioNr - 1;
+                string pasalintasVardas = vardai[indeksas];
+
+                for (int i = indeksas; i < mokiniuKiekis - 1; i++) {
+                    vardai[i] = vardai[i + 1];
+                    pazymiuKiekis[i] = pazymiuKiekis[i + 1];
+                    for (int j = 0; j < pazymiuKiekis[i]; j++) {
+                        pazymiai[i][j] = pazymiai[i + 1][j];
+                    }
+                }
+
+                mokiniuKiekis--;
+                cout << "Mokinys " << pasalintasVardas << " pašalintas." << endl;
+                break;
+            }
             case 7:
                 cout << "Programa uždaryta" << endl;
                 break;
