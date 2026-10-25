@@ -85,10 +85,93 @@ int main() {
                     cout << endl;
                 }
                 break;
-            case 3:
-            case 4:
+            case 3: {
+                if (mokiniuKiekis == 0) {
+                    cout << "Mokinių sąrašas tuščias." << endl;
+                    break;
+                }
+
+                int mokinioNr;
+                cout << "Įveskite mokinio numerį (1-" << mokiniuKiekis << ", 0 - grįžti į meniu): ";
+                cin >> mokinioNr;
+                while (mokinioNr < 0 || mokinioNr > mokiniuKiekis) {
+                    cout << "Neteisingas mokinio numeris. Įveskite skaičių nuo 1 iki " << mokiniuKiekis << " (0 - grįžti į meniu): ";
+                    cin >> mokinioNr;
+                }
+
+                if (mokinioNr == 0) {
+                    break;
+                }
+
+                int indeksas = mokinioNr - 1;
+                cout << vardai[indeksas] << ": ";
+                if (pazymiuKiekis[indeksas] == 0) {
+                    cout << "pažymių nėra";
+                } else {
+                    for (int j = 0; j < pazymiuKiekis[indeksas]; j++) {
+                        cout << pazymiai[indeksas][j] << " ";
+                    }
+                }
+                cout << endl;
+                break;
+            }
+            case 4: {
+                if (mokiniuKiekis == 0) {
+                    cout << "Mokinių sąrašas tuščias." << endl;
+                    break;
+                }
+
+                int mokinioNr;
+                cout << "Įveskite mokinio numerį (1-" << mokiniuKiekis << ", 0 - grįžti į meniu): ";
+                cin >> mokinioNr;
+                while (mokinioNr < 0 || mokinioNr > mokiniuKiekis) {
+                    cout << "Neteisingas mokinio numeris. Įveskite skaičių nuo 1 iki " << mokiniuKiekis << " (0 - grįžti į meniu): ";
+                    cin >> mokinioNr;
+                }
+
+                if (mokinioNr == 0) {
+                    break;
+                }
+
+                int indeksas = mokinioNr - 1;
+                if (pazymiuKiekis[indeksas] == 0) {
+                    cout << vardai[indeksas] << " neturi pažymių." << endl;
+                    break;
+                }
+
+                cout << vardai[indeksas] << " pažymiai:" << endl;
+                for (int j = 0; j < pazymiuKiekis[indeksas]; j++) {
+                    cout << j + 1 << ". " << pazymiai[indeksas][j] << endl;
+                }
+
+                int pazymioNr;
+                cout << "Įveskite pažymio numerį (1-" << pazymiuKiekis[indeksas] << ", 0 - grįžti į meniu): ";
+                cin >> pazymioNr;
+                while (pazymioNr < 0 || pazymioNr > pazymiuKiekis[indeksas]) {
+                    cout << "Neteisingas pažymio numeris. Įveskite skaičių nuo 1 iki " << pazymiuKiekis[indeksas] << " (0 - grįžti į meniu): ";
+                    cin >> pazymioNr;
+                }
+
+                if (pazymioNr == 0) {
+                    break;
+                }
+
+                int naujasPazymys;
+                cout << "Įveskite naują pažymį: ";
+                cin >> naujasPazymys;
+                while (naujasPazymys < 1 || naujasPazymys > 10) {
+                    cout << "Pažymys turi būti nuo 1 iki 10. Įveskite iš naujo: ";
+                    cin >> naujasPazymys;
+                }
+
+                pazymiai[indeksas][pazymioNr - 1] = naujasPazymys;
+                cout << "Pažymys atnaujintas." << endl;
+                break;
+            }
             case 5:
             case 6:
+                cout << "Ši funkcija dar neįgyvendinta." << endl;
+                break;
             case 7:
                 cout << "Programa uždaryta" << endl;
                 break;
